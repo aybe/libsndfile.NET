@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "libsndfile.NET": {
+      "commandName": "Project"
+    }
+  }
+}

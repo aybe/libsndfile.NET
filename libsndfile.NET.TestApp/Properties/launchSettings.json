@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "libsndfile.NET.TestApp": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\Aybe\\Music\\Forme - Söndag.wav\""
+    }
+  }
+}

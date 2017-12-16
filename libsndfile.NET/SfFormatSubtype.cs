@@ -82,10 +82,11 @@ namespace libsndfile.NET
         /// </summary>
         G723_24 = SfFormat__.SF_FORMAT_G723_24,
 
-        /// <summary>
-        ///     40kbs G723 ADPCM encoding.
-        /// </summary>
-        G723_40 = SfFormat__.SF_FORMAT_G723_40,
+        // not implemented
+        ///// <summary>
+        /////     40kbs G723 ADPCM encoding.
+        ///// </summary>
+        //G723_40 = SfFormat__.SF_FORMAT_G723_40,
 
         /// <summary>
         ///     12 bit Delta Width Variable Word encoding.
@@ -102,10 +103,11 @@ namespace libsndfile.NET
         /// </summary>
         DWVW_24 = SfFormat__.SF_FORMAT_DWVW_24,
 
-        /// <summary>
-        ///     N bit Delta Width Variable Word encoding.
-        /// </summary>
-        DWVW_N = SfFormat__.SF_FORMAT_DWVW_N,
+        // not implemented
+        ///// <summary>
+        /////     N bit Delta Width Variable Word encoding.
+        ///// </summary>
+        //DWVW_N = SfFormat__.SF_FORMAT_DWVW_N,
 
         /// <summary>
         ///     8 bit differential PCM (XI only).

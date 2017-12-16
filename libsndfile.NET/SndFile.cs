@@ -4,114 +4,68 @@ using JetBrains.Annotations;
 
 namespace libsndfile.NET
 {
-    public sealed class SndFile : IDisposable
+    public sealed partial class SndFile : IDisposable
     {
-        #region Private
-
-        private readonly unsafe SndFile__* _file;
-        private readonly SfInfo _info;
-
-        private unsafe SndFile([NotNull] SndFile__* file, SfInfo info)
-        {
-            if (file == null)
-                throw new ArgumentNullException(nameof(file));
-
-            _file = file;
-            _info = info;
-        }
-
-        private static unsafe string GetErrorMessage(SndFile__* file)
-        {
-            var ptr = sf_strerror(file);
-            return GetErrorMessage(ptr);
-        }
-
-        private static string GetErrorMessage(SfError error)
-        {
-            var ptr = sf_error_number(error);
-            return GetErrorMessage(ptr);
-        }
-
-        private static string GetErrorMessage(IntPtr intPtr)
-        {
-            return Marshal.PtrToStringAnsi(intPtr);
-        }
-
-        private void ReadCheck(Array array, long frames)
-        {
-            if (array == null || array.Length < Channels)
-                throw new ArgumentOutOfRangeException(nameof(array));
-
-            if (frames < 0)
-                throw new ArgumentOutOfRangeException(nameof(frames));
-        }
-
-        #endregion
-
         #region Public
 
         [PublicAPI]
-        public int Channels => _info.Channels;
+        public SfFormat Format => new SfFormat(Info);
 
         [PublicAPI]
-        public SfFormat Format => new SfFormat(_info.Format);
+        public long Frames => Info.Frames;
 
         [PublicAPI]
-        public long Frames => _info.Frames;
+        public int Sections => Info.Sections;
 
         [PublicAPI]
-        public int SampleRate => _info.SampleRate;
+        public bool Seekable => Info.Seekable;
 
         [PublicAPI]
-        public int Sections => _info.Sections;
-
-        [PublicAPI]
-        public bool Seekable => _info.Seekable;
-
-        [PublicAPI]
-        public static unsafe bool TryOpenRead([NotNull] string path, out SndFile result)
+        public static bool FormatCheck(SfFormat format)
         {
-            if (path == null)
-                throw new ArgumentNullException(nameof(path));
+            var info = (SfInfo) format;
+            return sf_format_check(ref info);
+        }
 
-            result = null;
+        /// <summary>
+        ///     Gets the message of the last error that occurred for an instance.
+        /// </summary>
+        /// <param name="sndFile">
+        ///     An instance to get the error message or <c>null</c> when an instance couldn't be opened.
+        /// </param>
+        /// <returns>
+        ///     A string describing the error that occurred.
+        /// </returns>
+        [PublicAPI]
+        public static unsafe string GetErrorMessage([CanBeNull] SndFile sndFile = null)
+        {
+            return GetErrorMessage(sndFile == null ? null : sndFile.Handle);
+        }
 
-            var info = new SfInfo();
-
-            var sndFile = sf_wchar_open(path, SfMode.Read, ref info);
-            if (sndFile == null)
-                return false;
-
-            result = new SndFile(sndFile, info);
-            return true;
+        /// <summary>
+        ///     Gets the current error that occurred on this instance, if any.
+        /// </summary>
+        /// <returns></returns>
+        [PublicAPI]
+        public unsafe SfError GetError()
+        {
+            return sf_error(Handle);
         }
 
         [PublicAPI]
-        public unsafe long Read([NotNull] short[] buffer, long frames)
+        public unsafe string GetString(SfString @string)
         {
-            ReadCheck(buffer, frames);
-            return sf_readf_short(_file, buffer, frames);
+            var ptr = sf_get_string(Handle, @string);
+            var s = Marshal.PtrToStringAnsi(ptr);
+            return s;
         }
 
         [PublicAPI]
-        public unsafe long Read([NotNull] int[] buffer, long frames)
+        public unsafe void SetString(SfString @string, [CanBeNull] string value)
         {
-            ReadCheck(buffer, frames);
-            return sf_readf_int(_file, buffer, frames);
-        }
-
-        [PublicAPI]
-        public unsafe long Read([NotNull] float[] buffer, long frames)
-        {
-            ReadCheck(buffer, frames);
-            return sf_readf_float(_file, buffer, frames);
-        }
-
-        [PublicAPI]
-        public unsafe long Read([NotNull] double[] buffer, long frames)
-        {
-            ReadCheck(buffer, frames);
-            return sf_readf_double(_file, buffer, frames);
+            var error = sf_set_string(Handle, @string, value);
+            if (error != SfError.NoError)
+                throw new InvalidOperationException(GetErrorMessage(error));
         }
 
         [PublicAPI]
@@ -120,12 +74,11 @@ namespace libsndfile.NET
             if (!Seekable)
                 throw new NotSupportedException();
 
-            var position = sf_seek(_file, frames, seek);
-            if (position != -1)
-                return position;
+            var position = sf_seek(Handle, frames, seek);
+            if (position == -1)
+                throw new InvalidOperationException(GetErrorMessage(Handle));
 
-            var message = GetErrorMessage(_file);
-            throw new InvalidOperationException(message);
+            return position;
         }
 
         #endregion
@@ -140,17 +93,20 @@ namespace libsndfile.NET
             GC.SuppressFinalize(this);
         }
 
-        private unsafe void Dispose(bool disposing)
+        [PublicAPI]
+        public unsafe SfError Close()
+        {
+            return sf_close(Handle);
+        }
+
+        private void Dispose(bool disposing)
         {
             if (IsDisposed)
                 return;
 
-            var error = sf_close(_file);
+            var error = Close();
             if (error != SfError.NoError)
-            {
-                var message = GetErrorMessage(error);
-                throw new InvalidOperationException(message);
-            }
+                throw new InvalidOperationException(GetErrorMessage(error));
 
             if (disposing)
             {
@@ -167,39 +123,39 @@ namespace libsndfile.NET
 
         #endregion
 
+        #region Private
+
+        internal unsafe SndFile__* Handle { get; }
+
+        private SfInfo Info { get; }
+
+        private static unsafe string GetErrorMessage(SndFile__* file)
+        {
+            var ptr = sf_strerror(file);
+            var s = Marshal.PtrToStringAnsi(ptr);
+            return s;
+        }
+
+        private static string GetErrorMessage(SfError error)
+        {
+            var ptr = sf_error_number(error);
+            var s = Marshal.PtrToStringAnsi(ptr);
+            return s;
+        }
+
+        #endregion
+
         #region Native methods
+
+        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool sf_format_check(
+            ref SfInfo sfInfo
+        );
 
         [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe SfError sf_close(
             SndFile__* sndFile
-        );
-
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe long sf_readf_short(
-            SndFile__* sndFile,
-            [MarshalAs(UnmanagedType.LPArray)] short[] buffer,
-            long frames
-        );
-
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe long sf_readf_int(
-            SndFile__* sndFile,
-            [MarshalAs(UnmanagedType.LPArray)] int[] buffer,
-            long frames
-        );
-
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe long sf_readf_float(
-            SndFile__* sndFile,
-            [MarshalAs(UnmanagedType.LPArray)] float[] buffer,
-            long frames
-        );
-
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe long sf_readf_double(
-            SndFile__* sndFile,
-            [MarshalAs(UnmanagedType.LPArray)] double[] buffer,
-            long frames
         );
 
         [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
@@ -210,10 +166,22 @@ namespace libsndfile.NET
         );
 
         [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
-        private static extern unsafe SndFile__* sf_wchar_open(
-            [MarshalAs(UnmanagedType.LPWStr)] string path,
-            SfMode mode,
-            ref SfInfo sfInfo
+        private static extern unsafe IntPtr sf_get_string(
+            SndFile__* sndFile,
+            SfString sfString
+        );
+
+        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi,
+            BestFitMapping = false, ThrowOnUnmappableChar = true)]
+        private static extern unsafe SfError sf_set_string(
+            SndFile__* sndFile,
+            SfString sfString,
+            [MarshalAs(UnmanagedType.LPStr)] string str
+        );
+
+        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe SfError sf_error(
+            SndFile__* sndFile
         );
 
         [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]

@@ -11,6 +11,13 @@ namespace libsndfile.NET
         public int Channels;
         public SfFormat__ Format;
         public int Sections;
-        [MarshalAs(UnmanagedType.Bool)] public bool Seekable;
+
+        [MarshalAs(UnmanagedType.Bool)]
+        public bool Seekable;
+
+        public static explicit operator SfInfo(SfFormat format)
+        {
+            return format.ToInfo();
+        }
     }
 }
