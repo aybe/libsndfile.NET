@@ -23,4 +23,15 @@
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\libsndfile.NET.Native\libsndfile.NET.Native.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="tools\uninstall.ps1">
+      <Pack>true</Pack>
+      <PackagePath>tools\</PackagePath>
+    </Content>
+  </ItemGroup>
+
 </Project>

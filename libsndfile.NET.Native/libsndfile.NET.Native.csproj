@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>libsndfile for .NET (native dependencies)</Description>
+    <Copyright>Copyright (c) 2017 Aybe</Copyright>
+    <PackageTags>libsndfile .NET wav flac ogg</PackageTags>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+
+    <Content Include="build\libsndfile.NET.Native.targets">
+      <Pack>true</Pack>
+      <PackagePath>build\</PackagePath>
+    </Content>
+
+    <Content Include="build\native\x64\flac.dll">
+      <Pack>true</Pack>
+      <PackagePath>build\native\x64\</PackagePath>
+    </Content>
+    <Content Include="build\native\x64\libsndfile-1.dll">
+      <Pack>true</Pack>
+      <PackagePath>build\native\x64\</PackagePath>
+    </Content>
+    <Content Include="build\native\x64\ogg.dll">
+      <Pack>true</Pack>
+      <PackagePath>build\native\x64\</PackagePath>
+    </Content>
+    <Content Include="build\native\x64\vorbis.dll">
+      <Pack>true</Pack>
+      <PackagePath>build\native\x64\</PackagePath>
+    </Content>
+    <Content Include="build\native\x64\vorbisenc.dll">
+      <Pack>true</Pack>
+      <PackagePath>build\native\x64\</PackagePath>
+    </Content>
+
+    <Content Include="build\native\x86\flac.dll">
+      <Pack>true</Pack>
+      <PackagePath>build\native\x86\</PackagePath>
+    </Content>
+    <Content Include="build\native\x86\libsndfile-1.dll">
+      <Pack>true</Pack>
+      <PackagePath>build\native\x86\</PackagePath>
+    </Content>
+    <Content Include="build\native\x86\ogg.dll">
+      <Pack>true</Pack>
+      <PackagePath>build\native\x86\</PackagePath>
+    </Content>
+    <Content Include="build\native\x86\vorbis.dll">
+      <Pack>true</Pack>
+      <PackagePath>build\native\x86\</PackagePath>
+    </Content>
+    <Content Include="build\native\x86\vorbisenc.dll">
+      <Pack>true</Pack>
+      <PackagePath>build\native\x86\</PackagePath>
+    </Content>
+
+  </ItemGroup>
+
+</Project>
