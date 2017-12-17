@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <Description>libsndfile for .NET</Description>
     <Copyright>Copyright (c) 2017 Aybe</Copyright>
     <Authors>Aybe</Authors>
-    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed virtual file system callbacks.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/aybe/libsndfile.NET</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/aybe/libsndfile.NET/master/LICENSE</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
