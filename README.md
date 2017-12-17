@@ -2,6 +2,8 @@
 
 This is [libsndfile](https://github.com/erikd/libsndfile) for .NET :)
 
+[![NuGet](https://img.shields.io/badge/nuget-v1.0.0-blue.svg)](https://www.nuget.org/packages/libsndfile.NET/1.0.0)
+
 ## Features
 - libsndfile API fully implemented
 - supports all additional formats, i.e. FLAC, Ogg/Vorbis (binaries built using [vcpkg](https://github.com/Microsoft/vcpkg))
