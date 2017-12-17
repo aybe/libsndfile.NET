@@ -2,40 +2,36 @@
 using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
-using libsndfile.NET.Helpers;
+using libsndfile.NET;
 
-namespace libsndfile.NET.TestApp
+namespace Examples
 {
     internal static class Program
     {
         private static void Main(string[] args)
         {
+            // to run this example, copy x86 native dependencies next to the EXE,
+            // get them either by downloading and unpacking libsndfile.NET.Native.nupkg with 7-Zip,
+            // or by referencing libsndfile.NET NuGet package instead of the VS project
+
             if (args.Length <= 0)
             {
-                Console.WriteLine("No path argument specified.");
+                Console.WriteLine("No audio file argument specified.");
                 return;
             }
 
             var source = args[0];
 
-            using (var sf = SndFile.OpenRead(source))
-            {
-                if (sf == null)
-                    throw new ArgumentNullException(nameof(sf));
-
-                var calcSignalMax = sf.CalcSignalMax();
-                var calcNormSignalMax = sf.CalcNormSignalMax();
-                var calcMaxAllChannels = sf.CalcMaxAllChannels();
-                var calcNormMaxAllChannels = sf.CalcNormMaxAllChannels();
-                var signalMax = sf.GetSignalMax();
-                var maxAllChannels = sf.GetMaxAllChannels();
-                var normFloat = sf.SetNormFloat(!sf.GetNormFloat());
-                var normDouble = sf.SetNormDouble(!sf.GetNormDouble());
-                var scaleFloatIntRead = sf.SetScaleFloatIntRead(true);
-                var scaleIntFloatWrite = sf.SetScaleIntFloatWrite(true);
-            }
+            Console.WriteLine("About to print available formats, press a key to continue . . .");
+            Console.ReadKey(true);
 
             PrintFormats();
+
+            Console.WriteLine();
+
+            Console.WriteLine("About to transcode, press a key to continue . . .");
+            Console.ReadKey(true);
+            Transcode(source);
         }
 
         private static void PrintFormats()
@@ -108,7 +104,7 @@ namespace libsndfile.NET.TestApp
                 throw new ArgumentNullException(nameof(destination));
 
             using (var input = SndFile.OpenRead(source))
-            using (var output = SndFile.OpenWrite(destination, SfFormat.DefaultFlac))
+            using (var output = SndFile.OpenWrite(destination, SfFormat.DefaultWav))
             {
                 if (input == null)
                     throw new InvalidOperationException(SndFile.GetErrorMessage());
@@ -131,7 +127,7 @@ namespace libsndfile.NET.TestApp
             using (var helper1 = new SfVirtualStreamHelper(File.OpenRead(source)))
             using (var helper2 = new SfVirtualStreamHelper(File.Create(destination)))
             using (var input = SndFile.OpenRead(helper1.Virtual))
-            using (var output = SndFile.OpenWrite(helper2.Virtual, SfFormat.DefaultFlac))
+            using (var output = SndFile.OpenWrite(helper2.Virtual, SfFormat.DefaultWav))
             {
                 if (input == null)
                     throw new InvalidOperationException(SndFile.GetErrorMessage());
