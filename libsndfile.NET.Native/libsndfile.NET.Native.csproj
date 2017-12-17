@@ -6,8 +6,11 @@
     <PackageVersion>1.0.0-beta</PackageVersion>
     <Description>libsndfile for .NET (native dependencies)</Description>
     <Copyright>Copyright (c) 2017 Aybe</Copyright>
+    <Authors>Aybe</Authors>
     <PackageReleaseNotes>First release</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/aybe/libsndfile.NET</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/aybe/libsndfile.NET/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageTags>libsndfile .NET wav flac ogg</PackageTags>
     <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
