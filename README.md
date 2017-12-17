@@ -6,7 +6,7 @@ This is [libsndfile](https://github.com/erikd/libsndfile) for .NET :)
 - libsndfile API fully implemented
 - supports all additional formats, i.e. FLAC, Ogg/Vorbis (binaries built using [vcpkg](https://github.com/Microsoft/vcpkg))
 - friendly interface with patterns familiar to .NET coders
-
+- works for AnyCPU, x86, x64
 
 ## Requirements
  - [Microsoft Visual C++ Redistributable for Visual Studio 2017](https://www.visualstudio.com/downloads/) (for the native libraries)
