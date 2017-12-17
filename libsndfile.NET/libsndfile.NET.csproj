@@ -3,10 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageVersion>1.0.0-beta</PackageVersion>
     <Description>libsndfile for .NET</Description>
     <Copyright>Copyright (c) 2017 Aybe</Copyright>
+    <PackageReleaseNotes>First release</PackageReleaseNotes>
     <PackageTags>libsndfile .NET wav flac ogg</PackageTags>
+    <IncludeSource>True</IncludeSource>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
