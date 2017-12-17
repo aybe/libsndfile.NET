@@ -7,6 +7,7 @@
     <Description>libsndfile for .NET</Description>
     <Copyright>Copyright (c) 2017 Aybe</Copyright>
     <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/aybe/libsndfile.NET</PackageProjectUrl>
     <PackageTags>libsndfile .NET wav flac ogg</PackageTags>
     <IncludeSource>True</IncludeSource>
   </PropertyGroup>
