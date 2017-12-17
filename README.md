@@ -31,4 +31,4 @@ First release !
 
 - fixed virtualized file system callbacks (wrong calling convention)
 - refactored example project
-- `SfVirtualHelper` is now in the example project since it was its first intent
+- `SfVirtualStreamHelper` is now in the example project since it was its first intent
