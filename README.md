@@ -18,5 +18,17 @@ This is [libsndfile](https://github.com/erikd/libsndfile) for .NET :)
  - basic features have been tested thoroughly
  - advanced features like special tags reading needs further testing
  - for now the only documentation available is the [official one](http://www.mega-nerd.com/libsndfile/api.html)
+ - currently the NuGet package configuration is `Debug` but libsndfile itself is `Release`, this will be addressed soon
  - UWP support is somehow limited because of [storage restrictions](https://trac.ffmpeg.org/wiki/CompilationGuide/WinRT#WindowsStoreCertificationFileIOandOtherDetails), the [`SfVirtualStreamHelper`](https://github.com/aybe/libsndfile.NET/blob/master/libsndfile.NET/Helpers/SfVirtualStreamHelper.cs) shows how UWP file access could be virtualized; this allows seamless file access while [a patched libsndfile for UWP](https://github.com/Microsoft/vcpkg/pull/2216) makes its way to this project
- 
+
+## Changelog
+
+1.0.0 (17/12/2017)
+
+First release !
+
+1.0.1  (17/12/2017)
+
+- fixed virtualized file system callbacks (wrong calling convention)
+- refactored example project
+- `SfVirtualHelper` is now in the example project since it was its first intent
