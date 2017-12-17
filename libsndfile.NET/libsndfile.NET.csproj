@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>1.0.0-beta</PackageVersion>
+    <PackageVersion>1.0.0</PackageVersion>
     <Description>libsndfile for .NET</Description>
     <Copyright>Copyright (c) 2017 Aybe</Copyright>
     <Authors>Aybe</Authors>
