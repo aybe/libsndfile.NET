@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -13,6 +13,16 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageTags>libsndfile .NET wav flac ogg</PackageTags>
     <IncludeSource>True</IncludeSource>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(OS)' == 'Unix' And Exists ('/Library/Frameworks')">
+    <DefineConstants>MACOS</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Unix' And !Exists ('/Library/Frameworks')">
+    <DefineConstants>LINUX</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'WINDOWS_NT'">
+    <DefineConstants>WINDOWS</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
