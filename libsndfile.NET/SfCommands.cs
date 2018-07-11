@@ -500,10 +500,10 @@ namespace libsndfile.NET
             return i;
         }
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe int sf_command(SndFile__* sndFile, SfCommand cmd, IntPtr data, int dataSize);
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe int sf_command(SndFile__* sndFile, SfCommand cmd, void* data, int dataSize);
 
         #endregion

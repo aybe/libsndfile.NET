@@ -17,56 +17,56 @@ namespace libsndfile.NET
                 throw new ArgumentOutOfRangeException(nameof(items));
         }
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_read_short(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] short[] buffer,
             long items
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_read_int(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] int[] buffer,
             long items
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_read_float(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] float[] buffer,
             long items
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_read_double(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] double[] buffer,
             long items
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_write_short(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] short[] buffer,
             long items
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_write_int(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] int[] buffer,
             long items
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_write_float(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] float[] buffer,
             long items
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_write_double(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] double[] buffer,
@@ -142,56 +142,56 @@ namespace libsndfile.NET
                 throw new ArgumentOutOfRangeException(nameof(frames));
         }
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_readf_short(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] short[] buffer,
             long frames
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_readf_int(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] int[] buffer,
             long frames
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_readf_float(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] float[] buffer,
             long frames
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_readf_double(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] double[] buffer,
             long frames
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_writef_short(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] short[] buffer,
             long frames
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_writef_int(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] int[] buffer,
             long frames
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_writef_float(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] float[] buffer,
             long frames
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_writef_double(
             SndFile__* sndFile,
             [MarshalAs(UnmanagedType.LPArray)] double[] buffer,
@@ -258,7 +258,7 @@ namespace libsndfile.NET
 
         #region Other
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe void sf_write_sync(
             SndFile__* sndFile
         );

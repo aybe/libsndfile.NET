@@ -147,31 +147,31 @@ namespace libsndfile.NET
 
         #region Native methods
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool sf_format_check(
             ref SfInfo sfInfo
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe SfError sf_close(
             SndFile__* sndFile
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe long sf_seek(
             SndFile__* sndFile,
             long frames,
             SfSeek whence
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe IntPtr sf_get_string(
             SndFile__* sndFile,
             SfString sfString
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi,
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi,
             BestFitMapping = false, ThrowOnUnmappableChar = true)]
         private static extern unsafe SfError sf_set_string(
             SndFile__* sndFile,
@@ -179,17 +179,17 @@ namespace libsndfile.NET
             [MarshalAs(UnmanagedType.LPStr)] string str
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe SfError sf_error(
             SndFile__* sndFile
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr sf_error_number(
             SfError error
         );
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe IntPtr sf_strerror(
             [CanBeNull] SndFile__* sndFile
         );

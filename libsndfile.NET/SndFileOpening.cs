@@ -95,14 +95,23 @@ namespace libsndfile.NET
 
         #region Native methods
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        #if WINDOWS
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe SndFile__* sf_wchar_open(
             [MarshalAs(UnmanagedType.LPWStr)] string path,
             SfMode mode,
             ref SfInfo info
         );
+        #else
+        [DllImport(NativeLib.Libsndfile, EntryPoint = "sf_open", CallingConvention = CallingConvention.Cdecl)]
+        private static extern unsafe SndFile__* sf_wchar_open(
+            [MarshalAs(UnmanagedType.LPStr)] string path,
+            SfMode mode,
+            ref SfInfo info
+        );
+        #endif
 
-        [DllImport("libsndfile-1", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(NativeLib.Libsndfile, CallingConvention = CallingConvention.Cdecl)]
         private static extern unsafe SndFile__* sf_open_virtual(
             ref SfVirtual @virtual,
             SfMode mode,
